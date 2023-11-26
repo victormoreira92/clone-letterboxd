@@ -1,24 +1,10 @@
-# README
+# Clone Letterboxd
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Full-stack clone of social media of movies  Letterboxd 
 
-Things you may want to cover:
 
-* Ruby version
+# Tech stack:
+Rails | Rspec | Devise | Bootstrap | PostgreSQL | Sass | 
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# To-Do
