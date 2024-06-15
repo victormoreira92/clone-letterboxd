@@ -8,3 +8,7 @@ Rails | Rspec | Devise | Bootstrap | PostgreSQL | Sass |
 
 
 # To-Do
+
+User Module 
+* User be able to create a account.
+* User be able to register in site.

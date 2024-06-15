@@ -1,0 +1,4 @@
+<h1>Dashboard#index</h1>
+  <p><%= @movies.title %></p>
+  <img src="https://image.tmdb.org/t/p/w500/<%= @movies.poster_path %>" width="85" height="95">
+<%= button_to "logout", destroy_user_session_path, method: :delete  %>
