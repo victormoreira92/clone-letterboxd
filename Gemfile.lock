@@ -66,6 +66,9 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     awesome_print (1.9.2)
     bcrypt (3.1.20)
     bindex (0.8.1)
@@ -91,6 +94,11 @@ GEM
     domain_name (0.6.20240107)
     dotenv (3.1.2)
     erubi (1.12.0)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
@@ -247,6 +255,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  annotate
   awesome_print
   bcrypt (~> 3.1.7)
   bootsnap
@@ -254,6 +263,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   dotenv
+  factory_bot_rails
   faker
   jbuilder
   jsbundling-rails

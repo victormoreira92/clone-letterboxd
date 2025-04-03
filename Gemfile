@@ -53,6 +53,7 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem 'image_processing', '~> 1.2'
 
+gem 'annotate'
 gem 'themoviedb-api'
 
 group :development, :test do
@@ -60,6 +61,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv'
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry'
   gem 'rspec-rails', '~> 6.1.0'
