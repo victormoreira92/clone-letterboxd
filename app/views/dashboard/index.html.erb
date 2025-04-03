@@ -1,2 +1,30 @@
 <h1>Dashboard#index</h1>
 <%= button_to "Sair", destroy_user_session_path, method: :delete %>
+
+<div class="container my-4">
+  <h2 class="mb-4">Filmes em Cartaz</h2>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <% @movies_top_rated[:results].each do |movie| %>
+      <% cache movie , expires_in: 24.hour do %>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <%= image_tag(
+                url_image(movie),
+                class: 'card-img-top',
+                alt: movie.title,
+                loading: 'lazy'
+              ) %>
+          <div class="card-body text-center">
+            <h6 class="card-title"><%= movie.title %></h6>
+            <% if movie.vote_average.present? %>
+              <p class="card-text text-muted">
+                <i class="bi bi-star-fill text-warning"></i> <%= movie.vote_average %>/10
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
