@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'dashboard/index'
   resources :user, except:[:destroy]
   get 'user/index' => 'user#index'
@@ -7,6 +8,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   devise_for :users
+  resources :movie, only: [:show] do
+    member do
+      post 'save_favorite'
+    end
+  end
+
+  resources :actor, only: [:show]
 
   get 'home/index'
   root 'dashboard#index'
