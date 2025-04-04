@@ -1,0 +1,18 @@
+<div class="contanier">
+  <h4><%= @actor.name %></h4>
+  <div class="row row-cols-lg-4 g-4">
+     <% @credits[:cast].each do |movie| %>
+          <div class="col">
+            <%= link_to movie_path(movie.id) do %>
+             <%= image_tag(
+                  url_image(movie),
+                  class: 'card-img-top',
+                  size: '150x350',
+                  alt: movie.title,
+                  loading: 'lazy'
+                ) %>
+        <% end %>
+        </div>
+      <% end %>
+  </div>
+</div>
