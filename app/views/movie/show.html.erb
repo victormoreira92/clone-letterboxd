@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <%= image_tag(
+                url_image_back(@movie),
+                class: 'card-img-top',
+                size: '550x550',
+                alt: @movie.title,
+                loading: 'lazy'
+              ) %>
+    <div class="col-12 py-4">
+      <div class="row">
+        <div class="col-4">
+          <div class="w-50">
+          <%= image_tag(
+                  url_image(@movie),
+                  class: 'card-img-top',
+                  size: '150x250',
+                  alt: @movie.title,
+                  loading: 'lazy'
+                ) %>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <h3><%= @movie.title %></h3>
+          <p>
+            <%= @movie.overview %>
+          <p>
+        </div>
+
+        <div class="col-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-text">
+              <p>Opções</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-4">
+          <% @cast.take(10).each do |member| %>
+            <%= link_to actor_path(member.id) do %> 
+              <span class="p-2 border bg-secondary text-center mr-2"><%= member.name %></span>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="col-4">
+          <% @crew.take(10).each do |member| %>
+            <span class="p-2 border bg-secondary text-center mr-2"><%= member.job %>.........<%= member.name %></span>
+          <% end %>
+        </div>
+
+        <div class="col-4">
+          <% @movie.genres.each do |genre| %>
+            <span class="p-2 border bg-secondary text-center mr-2"><%= genre.name %></span>
+          <% end %>
+        </div>
+        <%= link_to 'IMDB', "https://www.imdb.com/pt/title/#{@movie.imdb_id}", class: 'p-2 border bg-secondary',target: :_blank %>
+      </div>
+      <div class="row">
+        <% @similar[:results].take(10).each do |movie_similar| %>
+          <div class="col">
+            <%= image_tag(
+                  url_image(movie_similar),
+                  class: 'card-img-top',
+                  size: '150x250',
+                  alt: movie_similar.title,
+                  loading: 'lazy'
+                ) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
