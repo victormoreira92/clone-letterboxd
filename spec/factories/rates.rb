@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :rate do
     stars { 1 }
-    movie { nil }
-    user { nil }
-    review { "MyText" }
+    review { Faker::Lorem.paragraph_by_chars }
+    spoiler { false }
+    association :user
+    association :movie
   end
 end
