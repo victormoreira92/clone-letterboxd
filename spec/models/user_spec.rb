@@ -27,4 +27,10 @@ RSpec.describe User, type: :model do
 
 
   end
+
+  describe '#save_movie_watchlist' do
+    it 'add movie in watchlist when exist' do
+      
+    end
+  end
 end

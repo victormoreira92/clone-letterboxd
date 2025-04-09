@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  message:
+    add_movie_watchlist: '%{title} was added in your watchlist'
+    remove_movie_watchlist: '%{title} was removed from your watchlist'
