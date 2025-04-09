@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :movie, only: [:show] do
     member do
-      post 'save_favorite'
+      post 'save_movie_watchlist'
     end
   end
 

@@ -13,10 +13,36 @@
   </head>
 
   <body>
-    <section>
+  <% flash.each do |key, message| %>
+    <% if message.kind_of?(Array) %>
+      <div class="alert <%= flash_class(key) %> alert-dismissible text-center" id="alert">
+        <ul>
+          <% message.each do |messagem| %>
+            <li><%= messagem %></li>
+          <% end %>
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+
+    <% else %>
+
+    <%= turbo_frame_tag "flash" do %>
+      <div class="alert <%= flash_class(key) %> alert-dismissible text-center" >
+        <%= message %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    <% end %>
+  <% end %>
+  <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myalert">
+    An example alert with an icon
+    <button type="button" class="btn-close" data-bs-dismiss="alert" data-bs-target="#my-alert" aria-label="Close"></button>
+  </div>
+    <main>
 
     <%= yield %>
 
-    </section>
+    </main>
   </body>
 </html>

@@ -1,0 +1,6 @@
+<% binding.pry %>
+<% if @contact.errors.empty? %>
+  $('#exampleModal1').foundation('close');
+<% else %>
+  $(".alert").html('<%= j render partial: "layouts/alerts", locals: { alert: flash[:alert] } %>');
+<% end %>

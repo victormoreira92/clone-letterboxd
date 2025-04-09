@@ -5,3 +5,20 @@
 .color-white{
   color: aliceblue;
 }
+
+.watchlist-toggle-btn input[type="submit"] {
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.watchlist-toggle-btn.in-watchlist input[type="submit"] {
+  background-color: #dc3545;
+  color: white;
+}
+
+.watchlist-toggle-btn:not(.in-watchlist) input[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}

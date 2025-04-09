@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <% cache @movie , expires_in: 24.hour do %>
     <%= image_tag(
                 url_image_back(@movie),
                 class: 'card-img-top',
@@ -19,6 +20,7 @@
                   loading: 'lazy'
                 ) %>
           </div>
+          <%= button_to 'Add movie', save_movie_watchlist_movie_path(@movie.id), method: :post, class: "toogle_watchlist btn btn-info", data: { movie_id: @movie.id }, remote: true %>
         </div>
 
         <div class="col-4">
@@ -70,6 +72,7 @@
                 ) %>
           </div>
         <% end %>
+      <% end %>
       </div>
     </div>
   </div>

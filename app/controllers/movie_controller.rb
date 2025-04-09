@@ -1,4 +1,5 @@
 class MovieController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_movie
 
   def show
@@ -7,7 +8,15 @@ class MovieController < ApplicationController
     @similar = Tmdb::Movie.similar(params[:id])
   end
 
-  def save_favorite
+  def save_movie_watchlist
+    respond_to do |format|
+      if current_user.toogle_movie_watchlist(params[:id])
+        format.js { flash[:notice] = "The message was sent" }
+        format.json { render json: { toogle_movie: 'add_movie', message: t('message.add_movie_watchlist', title: @movie.title) } }
+      else
+        format.json { render json: { toogle_movie: 'remove_movie', message: t('message.remove_movie_watchlist', title: @movie.title) } }
+      end
+    end
   end
 
   private
@@ -17,6 +26,6 @@ class MovieController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(:movie_id)
+    params.require(:movie).permit(:movie_id, :title)
   end
 end
