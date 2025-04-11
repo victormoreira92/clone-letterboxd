@@ -6,4 +6,8 @@ module MovieHelper
   def watchlist_includes_movie?(movie_id)
     current_user.watchlist.movies.where(movie_id: movie_id).exists? ? 'Remove Movie of WatchList' : 'Add movie of WatchList'
   end
+
+  def get_rate(movie_id)
+    Rate
+  end
 end

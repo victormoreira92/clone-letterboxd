@@ -57,3 +57,33 @@ function showFlashMessage(message, type) {
   const bsAlert = new bootstrap.Alert(flashHtml)
   console.log(flashHtml) ; 
 }
+
+$(document).on('submit', '#rate_movie', function(e) {
+  e.preventDefault();
+  const form = $(this);
+  const movie_id = form.find('input#movie_id').val();
+  const stars = form.find('input#stars').val();
+  const user_id = form.find('input#user_id').val();
+  const authenticity_token = form.find('input[name="authenticity_token"]').val();
+
+  $.ajax({
+    url: form.attr('action'),
+    type: 'POST',
+    dataType: 'json',
+    data: { 
+      rate: { 
+        movie_id: movie_id,
+        user_id: user_id,
+        stars: stars
+      },
+      authenticity_token: authenticity_token
+    },
+    success: function(response) {
+      console.log(response)
+    },
+    error: function(xhr) {
+      showFlashMessage('Error updating watchlist', 'error');
+      console.error('Error:', xhr.responseText);
+    }
+  });
+});

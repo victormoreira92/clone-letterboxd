@@ -34,6 +34,16 @@
           <div class="card h-100 shadow-sm">
             <div class="card-text">
               <p>Opções</p>
+             <%= form_with model: Rate , url: rates_path, id: 'rate_movie', remote: true do |form| %>
+                <%= form.label :stars %>
+                <%= form.number_field :stars, min: 1, max: 5, default: 1, class: 'form-control' %>
+                <%= form.hidden_field :user_id, value: current_user.id %>
+                <%= form.hidden_field :movie_id, value: @movie.id %>
+                <%= form.submit 'Rate' %>
+              <% end %> 
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rateModal">
+              Avaliar Filme
+            </button>
             </div>
           </div>
         </div>
@@ -59,6 +69,9 @@
           <% end %>
         </div>
         <%= link_to 'IMDB', "https://www.imdb.com/pt/title/#{@movie.imdb_id}", class: 'p-2 border bg-secondary',target: :_blank %>
+            <div class="video-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/xN40B23SORM" frameborder="0" allowfullscreen></iframe>
+            </div>
       </div>
       <div class="row">
         <% @similar[:results].take(10).each do |movie_similar| %>
@@ -76,4 +89,49 @@
       </div>
     </div>
   </div>
+</div>
+
+<% if Movie.find_by(movie_id: @movie.id )  %>
+  <% if Movie.find_by(movie_id: @movie.id ).rates.blank? %>
+    <p>rates</p>
+  <% end %>
+<% end %>
+<!-- Botão que abre o modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="rateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_with model: Rate, url: rates_path, data: { turbo_frame: "rates_frame" } do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title">Avaliar <%= @movie.title %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <%= f.label :stars, "Nota (1-5 estrelas)" %>
+            <%= f.number_field :stars, in: 1..5, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :review, "Crítica (opcional)" %>
+            <%= f.text_area :review, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :spoiler, "Spoiler" %>
+            <%= f.radio_button :spoiler, 'True' %>
+          </div>
+          <%= f.hidden_field :movie_id, value: @movie.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Enviar Avaliação", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Área que exibe a avaliação após o modal fechar -->
+<div id="user_rating">
+
 </div>

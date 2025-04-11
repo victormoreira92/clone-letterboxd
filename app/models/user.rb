@@ -6,6 +6,7 @@ class User < ApplicationRecord
   after_create :set_watchlist
 
   has_one :watchlist, dependent: :destroy
+  has_many :rates
 
   def toogle_movie_watchlist(movie_id)
     watchlist.toogle_movie(movie_id)
