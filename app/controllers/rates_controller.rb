@@ -1,17 +1,16 @@
 class RatesController < ApplicationController
-  before_action :set_rate
-  
+  before_action :set_rate, only: :update
+
   def create
     respond_to do |format|
       @rate = Rate.new(rate_params)
-      movie_id = Movie.find_or_create_by(movie_id: movie_id).id
 
-      @rate.movie_id = movie_id
       if @rate.save
         flash[:success] = "Movie was rate sucessfull"
-        format.html { redirect_to movie_path(@movie.id) }
+        format.html { redirect_to movie_path(params[:rate][:movie_id]) }
       else
-        format.html { redirect_to  }
+        flash[:error] = @rate.error.full_messages
+        format.html { redirect_to movie_path(params[:rate][:movie_id])  }
       end
     end
   end
@@ -19,10 +18,11 @@ class RatesController < ApplicationController
   def update
     respond_to do |format|
       if @rate.update(rate_params)
-        format.html { render json: { stars: @rate.stars } }
+        flash[:success] = "Movie was updated"
+        format.html { redirect_to movie_path(params[:rate][:movie_id]) }
       else
-        format.json { render json: { error: @rate.errors.full_messages } }
-      end
+        flash[:error] = @rate.error.full_messages
+        format.html { redirect_to movie_path(params[:rate][:movie_id])  }      end
     end
   end
 
@@ -30,7 +30,6 @@ class RatesController < ApplicationController
 
   def set_rate
     @rate = Rate.find(params[:id])
-    @movie = Tmdb::Movie.detail(params[:movie_id])
   end
 
 

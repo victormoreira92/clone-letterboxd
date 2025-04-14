@@ -6,6 +6,8 @@ class MovieController < ApplicationController
     @cast = Tmdb::Movie.cast(params[:id])
     @crew = Tmdb::Movie.crew(params[:id])
     @similar = Tmdb::Movie.similar(params[:id])
+    @rate = current_user.rates.find_by(movie_id: params[:id])
+    @videos = Tmdb::Movie.videos(params[:id]).select { |video| video.type == 'Trailer' }
   end
 
   def save_movie_watchlist
