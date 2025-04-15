@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'genres/show'
 
 
   get 'dashboard/index'
