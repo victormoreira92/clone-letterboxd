@@ -23,4 +23,9 @@ Rails.application.routes.draw do
 
   get 'home/index'
   root 'dashboard#index'
+  resources :search, only: [:index] do
+    collection do
+      get 'search_query'
+    end
+  end
 end

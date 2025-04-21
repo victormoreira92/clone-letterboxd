@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 p-3">
+  <div class="dropdown custom-dropdown">
+    <button class="btn dropdown-toggle border" type="button" id="searchDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      All
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="searchDropdown">
+      <li><a class="dropdown-item active" href="#" data-value="all">All</a></li>
+      <li><a class="dropdown-item" href="#" data-value="movies">Movies</a></li>
+      <li><a class="dropdown-item" href="#" data-value="celebs">Celebs</a></li>
+      <li><a class="dropdown-item" href="#" data-value="companies">Companies</a></li>
+      <li><a class="dropdown-item" href="#" data-value="keywords">Keywords</a></li>
+    </ul>
+    <input type="text" class="form-control" id />
+  </div>
+  <div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <!-- Formulário de Busca com Select2 -->
+<%= form_with url: search_query_search_index_path, method: :get, html: { class: "mb-4", data: { controller: "search" } } do |f| %>
+  <div class="row g-2 align-items-center">
+    <!-- Input de Busca (Select2) -->
+    <div class="col-md-6">
+      <%= f.select :query, 
+            [], 
+            {}, 
+            { 
+              class: "form-select select2",
+              id: "movie-search-input",
+              data: {
+                placeholder: "Search all fields...",
+                search_target: "input"
+              }
+            } %>
+    </div>
+
+    <!-- Filtro -->
+    <div class="col-md-3">
+      <%= f.select :filter, 
+            options_for_select([["All", "all"], ["Movie", "movie"], ["People", "person"], ["Keywords", "keyword"]]),
+            {}, 
+            { 
+              class: "form-select",
+              data: {
+                action: "change->search#updateFilter",
+                search_target: "filter"
+              } 
+            } %>
+    </div>
+
+    <!-- Botão (opcional, pois a busca será via AJAX) -->
+    <div class="col-md-3">
+      <%= f.submit "Buscar", class: "btn btn-primary w-100" %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Área de Resultados (opcional) -->
+<div id="search-results" class="mt-4"></div>
+      
+
+      <!-- Resultados (renderizado via AJAX) -->
+      <div id="movie-results" class="row"></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
