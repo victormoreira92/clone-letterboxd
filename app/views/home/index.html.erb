@@ -1,18 +1,51 @@
-<nav class="navbar navbar-expand-lg bg-black">
- <div class="container-fluid">
-    <a class="navbar-brand text-light
-    
-    
-    
-    
-    
-    
-  " href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <%= button_to 'Log In', new_user_session_path %>
+<div class="position-relative overflow-hidden  p-md-4 m-md-4 text-center">
+    <%= image_tag(
+                home_image_back(@movies_upcomming.second),
+                class: 'card-img-top shadow-lg rounded',
+                size: '1000x550',
+                alt: @movies_upcomming.first.second,
+                loading: 'lazy'
+              ) %>
+  <div class="text-white position-absolute" style="rotate: 90deg; bottom: 20%; right: 10px;">
+    <%= @movies_upcomming.second.title%> (<%= @movies_upcomming.second.release_date[..3] %>)
   </div>
-</nav>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center p-2">
+      <p class="lead text-white fw-bold">Track films you've watched</p>
+      <p class="lead text-white fw-bold">Save those you want see</p>
+      <a class="btn btn-success" href="<%= new_user_session_path %>">Log In</a>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-5">
+  <div class="row justify-content-center">
+    <% @movies_upcomming.take(5).each do |movie| %>
+      <div class="col-auto mb-3">
+<%= link_to movie_path(movie.id), 
+    class: 'd-block', 
+    data: { 
+      bs_toggle: "tooltip", 
+      bs_placement: "top",
+      bs_custom_class: 'tooltip-background',
+      bs_title: movie.title 
+    } do %>          
+    <%= image_tag(
+                url_image(movie),
+                class: 'img-fluid border border-white rounded',
+                alt: movie.title,
+                loading: 'lazy',
+                style: 'height: 231px; width: 156px;'
+              ) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <div>
 </div>
+
+

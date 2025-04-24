@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'genres/show'
 
+  get 'home/index'
+  root 'home#index'
 
   get 'dashboard/index'
   resources :user, except:[:destroy]
@@ -16,13 +17,12 @@ Rails.application.routes.draw do
       post 'rate_movie'
     end
   end
+  get 'genres/show'
 
   resources :rates, only: %i[create update]
 
   resources :actor, only: [:show]
 
-  get 'home/index'
-  root 'dashboard#index'
   resources :search, only: [:index] do
     collection do
       get 'search_query'

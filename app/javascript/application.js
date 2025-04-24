@@ -8,6 +8,8 @@ import select2 from 'select2';
 window.jquery = jQuery
 window.$ = jQuery
 select2($);
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 $('.select2').select2({
   placeholder: "Search all fields...",
   allowClear: true,
@@ -178,4 +180,10 @@ $(document).on('submit', '#rate_movie', function(e) {
       console.error('Error:', xhr.responseText);
     }
   });
+});
+
+$(document).on('hover', '.link-home-index', function(e){
+  e.preventDefault();
+  console.log(this);
+
 });

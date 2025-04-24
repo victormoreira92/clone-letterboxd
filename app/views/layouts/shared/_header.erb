@@ -1,0 +1,66 @@
+<header class="p-3 text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center">
+      <!-- Logo -->
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+        <%= image_tag 'cinelist', width: 70, height: 72, alt: 'CineList Logo', class: 'me-3' %>
+      </a>
+      
+      <!-- Formulário de Busca -->
+      <%= form_with url: search_query_search_index_path, method: :get, html: { class: 'col-12 col-lg-6 mb-3 mb-lg-0 me-4', data: { controller: 'search' }, role: 'search' } do |f| %>
+        <div class="row g-2 align-items-center">
+          <div class="col-md-7">
+            <%= f.select :query,
+                         [],
+                         {},
+                         { class: 'form-select select2',
+                           id: 'movie-search-input',
+                           required: true,
+                           placeholder: 'Pesquisar filmes, pessoas ou palavras-chave...',
+                           aria: { label: 'Pesquisar no CineList' },
+                           data: { search_target: 'input' } } %>
+          </div>
+          <div class="col-md-3">
+            <%= f.select :filter,
+                         options_for_select([['Todos', 'all'], ['Filmes', 'movie'], ['Pessoas', 'person'], ['Palavras-chave', 'keyword']]),
+                         {},
+                         { class: 'form-select',
+                           aria: { label: 'Filtrar tipo de busca' },
+                           data: { action: 'change->search#updateFilter', search_target: 'filter' } } %>
+          </div>
+          <div class="col-md-2">
+            <%= f.submit 'Buscar', class: 'btn btn-primary w-100', aria: { label: 'Iniciar busca' } %>
+          </div>
+        </div>
+      <% end %>
+      |
+      <!-- Navegação -->
+      <ul class="nav col-12 col-lg-auto mb-2 mb-lg-0 ms-lg-3 me-3">
+        <li>
+          <i class="bi bi-bookmark-fill me-1"></i> WatchList
+          <% if current_user %>
+            <%= link_to dashboard_url, class: 'nav-link px-2 text-white' do %>
+              <span class="badge text-bg-warning ms-1">179</span>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+      <!-- Botão de Ação -->
+      <div class="text-end">
+        <% if current_user %>
+        <div class="dropdown text-end">
+          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle h4" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle text-white p-2"></i> 
+            <span class="text-white fs-6 text"></span>                  
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <%= button_to 'Sign out', destroy_user_session_path, class: "dropdown-item" %>
+          </ul>
+        <% else %>
+          <%= button_to 'Log In', new_user_session_path, class: 'btn btn-warning' %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
