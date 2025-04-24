@@ -1,6 +1,13 @@
 body {
   background-color: #000f1f;
 }
+.login-page{
+  background-color: #c5e1ff;
+}
 .tooltip-background {
   --bs-tooltip-bg: green;
+}
+
+.img{
+  background-image: url('cinelist.png');
 }

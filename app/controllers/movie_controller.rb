@@ -1,12 +1,11 @@
 class MovieController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_movie
 
   def show
     @cast = Tmdb::Movie.cast(params[:id])
     @crew = Tmdb::Movie.crew(params[:id])
     @similar = Tmdb::Movie.similar(params[:id])
-    @rate = current_user.rates.find_by(movie_id: params[:id])
+    #@rate = current_user.rates.find_by(movie_id: params[:id])
     @videos = Tmdb::Movie.videos(params[:id]).select { |video| video.type == 'Trailer' }
   end
 

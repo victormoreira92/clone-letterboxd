@@ -1,13 +1,13 @@
 <div class="position-relative overflow-hidden  p-md-4 m-md-4 text-center">
     <%= image_tag(
-                home_image_back(@movies_upcomming.second),
+                home_image_back(@movies_upcomming.third),
                 class: 'card-img-top shadow-lg rounded',
                 size: '1000x550',
-                alt: @movies_upcomming.first.second,
+                alt: @movies_upcomming.third.title,
                 loading: 'lazy'
               ) %>
   <div class="text-white position-absolute" style="rotate: 90deg; bottom: 20%; right: 10px;">
-    <%= @movies_upcomming.second.title%> (<%= @movies_upcomming.second.release_date[..3] %>)
+    <%= @movies_upcomming.third.title%> (<%= @movies_upcomming.third.release_date[..3] %>)
   </div>
 </div>
 <div class="container">
@@ -22,7 +22,7 @@
 
 <div class="container pt-5">
   <div class="row justify-content-center">
-    <% @movies_upcomming.take(5).each do |movie| %>
+    <% @movies_upcomming.take(6).each do |movie| %>
       <div class="col-auto mb-3">
 <%= link_to movie_path(movie.id), 
     class: 'd-block', 

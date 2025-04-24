@@ -10,6 +10,10 @@ window.$ = jQuery
 select2($);
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+// Verifica se existe um elemento com classe login-page na página
+if (document.querySelector('.login-page')) {
+  document.body.style.backgroundColor = '#c5e1ff';
+}
 $('.select2').select2({
   placeholder: "Search all fields...",
   allowClear: true,
